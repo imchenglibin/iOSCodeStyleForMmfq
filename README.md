@@ -103,11 +103,9 @@ static const NSString *kMQServerHost = @"http://192.168.0.110";
 #pragma mark getter and setter
 - (MQPerson*)person {
     if (!_person) {
-        MQPerson *person = [[MQPerson alloc] initWithName:@"小天"
-                                                      age:25
-                                                   gender:kMQGenderMale];
-        
-        (void)person;
+        _person = [[MQPerson alloc] initWithName:@"小天"
+                                             age:25
+                                          gender:kMQGenderMale];
     }
     return _person;
 }
