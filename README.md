@@ -32,7 +32,13 @@ static const NSString *kDJBaseUrl = @"http://192.168.0.110";
 @property (weak, nonatomic) id<UITableViewDelegate> tableViewDelegate;
 ```
 #####6、weak的使用要注意场合，除非是为了避免循环饮用，一般不建议用weak属性，使用strong提高程序效率<br>
-
+```objective-c
+DJWeakify(self);
+self.sendCodeButton.dj_command = [DJCommand alloc] initWithBlock:^{
+                                                                      DJStrongify(self);
+                                                                      self.viewModel.sendCode();
+                                                                  }];
+```
 #####7、关于copy 的使用，一般拥有可变类型的时候，属性申明应该为copy，比如NSString、NSDictionary、NSSet等都有可变的版本NSMutableArray、NSMutableDictionary、NSMutableSet<br>
 ```objective-c
 @property (copy, nonatomic, readonly) NSArray<NSString*> *names;
