@@ -4,27 +4,23 @@ iOS代码整体要符合<a href="https://developer.apple.com/library/mac/documen
 #####1、声明方法或类时，请注意空格的使用，参数过多时可以换行保持对齐
 ```objective-c
 - (instancetype)initWithName:(NSString*)name
-                         age:(NSInteger)age
-                      gender:(MQGender)gender;
+                      mobile:(NSString*)mobile;
 ```
 
 #####方法的调用也一样<br>
 ```objective-c
-MQPerson *person = [[MQPerson alloc] initWithName:@"小天"
-                                              age:25
-                                           gender:kMQGenderMale];
+DJUser *user = [[DJUser alloc] initWithName:@"紫藤"
+                                     mobile:@"12345678999"];
 ```
 
 #####2、变量命名规则一般采用首字母小写的驼峰形式，定义的成员变量必须以’_’开头，常量以k开头，一般能用property的都应该用property而不使用自定义成员变量<br>
 ```objective-c
 @private NSString *_name;
 
-static const NSString *kMQServerHost = @"http://192.168.0.110";
+static const NSString *kDJBaseUrl = @"http://192.168.0.110";
 
-@property (copy, nonatomic, readonly) NSString *name;
-@property (assign, nonatomic, readonly) NSInteger age;
-@property (assign, nonatomic, readonly) MQGender gender;
-@property (copy, nonatomic) NSString *phoneNumber;
+@property (copy, nonatomic) NSString *name;
+@property (copy, nonatomic) NSString *mobile;
 
 ```
 #####3、注释很重要，但除了开头的版权声明，尽可能把代码写的如同文档一样，让别人直接看代码就知道意思，写代码时别担心名字太长，相信Xcode的提示功能<br>
@@ -45,16 +41,15 @@ static const NSString *kMQServerHost = @"http://192.168.0.110";
 ```
 #####要支持copy，必须要实现NSCoping协议<br>
 ```objective-c
-@interface MQPerson:NSObject <NSCopying>
+@interface DJUser : NSObject <NSCopying>
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    MQPerson *instance = [[[self class] allocWithZone:zone] initWithName:self.name
-                                                                     age:self.age
-                                                                  gender:self.gender];
+    DJUser *instance = [[[self class] allocWithZone:zone] initWithName:self.name
+                                                                mobile:self.mobile];
     return instance;
 }
 ```
-#####8、如果想扩展一个类，一般使用category，扩展的文件名一般为NSString+(MQHash)类型，扩展的方法名必须要有前缀比如mq_hash，防止和其他扩展冲突<br>
+#####8、如果想扩展一个类，一般使用category，扩展的文件名一般为NSString+(DJHash)类型，扩展的方法名必须要有前缀比如dj_md5，防止和其他扩展冲突<br>
 
 #####9、左花括号不换行<br>
 ```objective-c
@@ -101,13 +96,12 @@ static const NSString *kMQServerHost = @"http://192.168.0.110";
 //methods
 
 #pragma mark getter and setter
-- (MQPerson*)person {
-    if (!_person) {
-        _person = [[MQPerson alloc] initWithName:@"小天"
-                                             age:25
-                                          gender:kMQGenderMale];
+- (DJUser*)user {
+    if (!_user) {
+        _user = [[DJUser alloc] initWithName:@"紫藤"
+                                      mobile:@"12345678999"];
     }
-    return _person;
+    return _user;
 }
 
 - (UITableView*)tableView {
