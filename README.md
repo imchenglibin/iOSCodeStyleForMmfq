@@ -175,5 +175,8 @@ ViewController基本上是大部分业务的载体，本身代码已经相当复
 <a href="https://github.com/marcuswestin/WebViewJavascriptBridge">WebViewJavascriptBridge－－－JS和OC互相调用</a><br>
 <a href="https://github.com/lxcid/LXReorderableCollectionViewFlowLayout">LXReorderableCollectionViewFlowLayout－－－支持拖动排序</a><br>
 <a href="https://github.com/ReactiveCocoa/ReactiveCocoa">ReactiveCocoa－－－函数式编程</a><br>
+<a href="https://github.com/ibireme/YYKit">YYKit－－－iOS常用主控</a><br>
+<a href="https://github.com/li6185377/LKDBHelper-SQLite-ORM">LKDBHelper-SQLite-ORM－－－FMDB的orm封装</a><br>
+
 
 
