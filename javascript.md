@@ -30,7 +30,7 @@
 				index.js
 				djexports.js(可选)
 #### 结构说明
-    项目根目录下分为两块：commons和modules
+  项目根目录下分为两块：commons和modules
 	1 commons：
 		这个目录主要用于存放公有的模块，该目录下分为四个子目录：components，controllers，utils，
 		view-models分别用于存放公有的组件，控制器，工具类和view-model，其中比较常用的应该是components
@@ -155,7 +155,7 @@ constructor<br>
 public get/set 公用访问器，set只能传一个参数<br>
 public methods 公用方法，公用相关命名使用小驼峰式写法(lowerCamelCase)<br>
 private get/set 私有访问器，私有相关命名应加上下划线 _ 为前缀<br>
-private methods 私有方法
+private methods 私有方法<br>
 ```javascript
 // good
 class SomeClass {
