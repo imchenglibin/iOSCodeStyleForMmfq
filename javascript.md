@@ -3,7 +3,6 @@
 ##	1 项目整体结构
 
 #### 结构示意图
-
 	src
 		commons
 			components
@@ -31,8 +30,7 @@
 				index.js
 				djexports.js(可选)
 #### 结构说明
-
-	项目根目录下分为两块：commons和modules
+    项目根目录下分为两块：commons和modules
 	1 commons：
 		这个目录主要用于存放公有的模块，该目录下分为四个子目录：components，controllers，utils，
 		view-models分别用于存放公有的组件，控制器，工具类和view-model，其中比较常用的应该是components
@@ -75,183 +73,181 @@
 	里面讲解到
 
 ### 其他事项
-    1 项目文件名统一小写，用‘-’作为分隔符（可以避免不同平台文件大小写敏感问题）
-    2 index.js必须放在各个模块的根目录，djexports.js文件规定放在大模块的根目录下面，如上面的split
-      模块
+* 项目文件名统一小写，用‘-’作为分隔符（可以避免不同平台文件大小写敏感问题）
+* index.js必须放在各个模块的根目录，djexports.js文件规定放在大模块的根目录下面，如上面的split模块
       
 ## 2项目编码规范说明
 
 ### 代码规范
-    1 整体代码规范
-      1 尽量使用const、let替代var
-      2 字符串使用',编程构建字符串时，使用字符串模板而不是字符串连接
-        ```javascript
-            // bad
-            function sayHi(name) {
-              return 'How are you, ' + name + '?';
-            }
+#### 1 整体代码规范
+* 尽量使用const、let替代var
+* 字符串使用',编程构建字符串时，使用字符串模板而不是字符串连接
+```javascript
+// bad
+function sayHi(name) {
+    return 'How are you, ' + name + '?';
+}
             
-            // bad
-            function sayHi(name) {
-              return ['How are you, ', name, '?'].join();
-            }
+// bad
+function sayHi(name) {
+    return ['How are you, ', name, '?'].join();
+}
             
-            // good
-            function sayHi(name) {
-              return `How are you, ${name}?`;
-            }
-        ```
-      3 使用字面量语法创建数组,如果你不知道数组的长度，使用 push
-        ```javascript
-            // bad
-            const items = new Array();
+// good
+function sayHi(name) {
+    return `How are you, ${name}?`;
+}
+```
+* 使用字面量语法创建数组,如果你不知道数组的长度，使用 push
+```javascript
+// bad
+const items = new Array();
             
-            // good
-            const items = [];
+// good
+const items = [];
             
-            const someStack = [];
+const someStack = [];
     
-            // bad
-            someStack[someStack.length] = 'abracadabra';
+// bad
+someStack[someStack.length] = 'abracadabra';
             
-            // good
-            someStack.push('abracadabra');
-        ```
-      3 使用对象的多个属性时请建议使用对象的解构赋值
-        ```javascript
-            const props = {
-                style: {
-                    left: 30
-                },
-                className: 'class-name',
-                children: []
-            };
+// good
+someStack.push('abracadabra');
+```
+* 使用对象的多个属性时请建议使用对象的解构赋值
+```javascript
+const props = {
+    style: {
+        left: 30
+    },
+    className: 'class-name',
+    children: []
+};
             
-            const { children, className } = props;
-        ```
-      4 定义类时总是使用 class 关键字，避免直接修改 prototype，class 语法更简洁
-        ```javascript
-            // bad
-            function Queue(contents = []) {
-              this._queue = [...contents];
-            }
-            Queue.prototype.pop = function() {
-              const value = this._queue[0];
-              this._queue.splice(0, 1);
-              return value;
-            }
+const { children, className } = props;
+```
+* 定义类时总是使用 class 关键字，避免直接修改 prototype，class 语法更简洁
+```javascript
+// bad
+function Queue(contents = []) {
+    this._queue = [...contents];
+}
+Queue.prototype.pop = function() {
+    const value = this._queue[0];
+    this._queue.splice(0, 1);
+    return value;
+}
             
-            // good
-            class Queue {
-              constructor(contents = []) {
-                this._queue = [...contents];
-              }
-              pop() {
-                const value = this._queue[0];
-                this._queue.splice(0, 1);
-                return value;
-              }
-            }
-        ```
-        定义类时，方法的顺序如下
-        constructor
-        public get/set 公用访问器，set只能传一个参数
-        public methods 公用方法，公用相关命名使用小驼峰式写法(lowerCamelCase)
-        private get/set 私有访问器，私有相关命名应加上下划线 _ 为前缀
-        private methods 私有方法
-        ```javascript
-            // good
-            class SomeClass {
-              constructor() {
-                // constructor
-              }
+// good
+class Queue {
+    constructor(contents = []) {
+        this._queue = [...contents];
+    }
+    pop() {
+        const value = this._queue[0];
+            this._queue.splice(0, 1);
+            return value;
+        }
+    }
+```
+定义类时，方法的顺序如下<br>
+constructor<br>
+public get/set 公用访问器，set只能传一个参数<br>
+public methods 公用方法，公用相关命名使用小驼峰式写法(lowerCamelCase)<br>
+private get/set 私有访问器，私有相关命名应加上下划线 _ 为前缀<br>
+private methods 私有方法
+```javascript
+// good
+class SomeClass {
+    constructor() {
+        // constructor
+    }
             
-              get aval() {
-                // public getter
-              }
+    get aval() {
+        // public getter
+    }
             
-              set aval(val) {
-                // public setter
-              }
+    set aval(val) {
+        // public setter
+    }
             
-              doSth() {
-                // 公用方法
-              }
+    doSth() {
+        // 公用方法
+    }
             
-              get _aval() {
-                // private getter
-              }
+    get _aval() {
+        // private getter
+    }
             
-              set _aval() {
-                // private setter
-              }
+    set _aval() {
+        // private setter
+    }
             
-              _doSth() {
-                // 私有方法
-              }
-            }
-        ```
-        如果不是class类，不使用new
-        ```javascript
-            // not good
-            function Foo() {
+    _doSth() {
+        // 私有方法
+    }
+}
+```
+如果不是class类，不使用new<br>
+```javascript
+// not good
+function Foo() {
             
-            }
-            const foo = new Foo();
+}
+const foo = new Foo();
             
-            // good
-            class Foo {
+// good
+class Foo {
             
-            }
-            const foo = new Foo();
-        ```
-      5 promise是一种异步处理模式, 发promise申明和调用分开，推荐异步方式使用Promise
-        ```javascript
-            // not good
-            (new Promise((resolve, reject) => {}))
-                .then((result) => {})
-                .catch((error) => {});
+}
+const foo = new Foo();
+```
+* promise是一种异步处理模式, 发promise申明和调用分开，推荐异步方式使用Promise
+```javascript
+// not good
+(new Promise((resolve, reject) => {}))
+    .then((result) => {})
+    .catch((error) => {});
                 
-            // good
-            var promise = new Primise((resolve, reject) => {});
-            promise.then((result) => {})
-                .catch((error) => {})
-        ```
-      6 表示区块起首的大括号，不要另起一行
-        ```javascript
-            // bad
-            function sayHi()
-            {
+// good
+var promise = new Primise((resolve, reject) => {});
+promise.then((result) => {})
+    .catch((error) => {})
+```
+* 表示区块起首的大括号，不要另起一行
+```javascript
+// bad
+function sayHi()
+{
                   
-            }
+}
               
-            // good
-            function sayHi() {
+// good
+function sayHi() {
                   
-            }
-        ```
-      7 不要省略句末的分号
-        ```javascript
-            x = y
-        　　(function (){
-        　　　　...
-        　　})();
+}
+```
+* 不要省略句末的分号
+```javascript
+x = y
+(function (){
+    ...
+})();
         　　
-        　　// 等同于
-        　　x = y(function (){...})(); //something wrong
-        ```
-      8 避免使用"相等"（==）运算符，尽量使用"严格相等"（===）运算符
-        "相等"运算符会自动转换变量类型，造成很多意想不到的情况
-      9 尽量不使用自增（++）和自减（--）运算符，用+=和-=代替
-      10 总是使用大括号表示区块
-        ```javascript
-            // bad
-            if (a) b();
+// 等同于
+x = y(function (){...})(); //something wrong
+```
+* 避免使用"相等"（==）运算符，尽量使用"严格相等"（===）运算符, "相等"运算符会自动转换变量类型，造成很多意想不到的情况
+* 尽量不使用自增（++）和自减（--）运算符，用+=和-=代替
+* 总是使用大括号表示区块
+```javascript
+// bad
+if (a) b();
               
-            // good 
-            if (a) {
-                b();
-            }
-        ```
+// good 
+if (a) {
+    b();
+}
+```
     
 				
